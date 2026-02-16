@@ -2,11 +2,18 @@ from tkinter import *
 from tkinter import ttk 
 from tkinter import messagebox
 from tkcalendar import DateEntry
+from dotenv import load_dotenv
+import os
 import pymysql
 
 def connect_database():
     try:
-        connection=pymysql.connect(host='localhost',user='root',password='bhavya0420')
+        load_dotenv()
+
+        connection = pymysql.connect(
+            host=os.getenv("DB_HOST"),
+            user=os.getenv("DB_USER"),
+            password=os.getenv("DB_PASSWORD"))
         cursor=connection.cursor()
     except:
         messagebox.showerror('Error','Database connectivity issue, Please open mysql command line client')
