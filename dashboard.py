@@ -4,8 +4,14 @@ from employees import employee_form
 from supplier import supplier_form
 from category import category_form
 from products import product_form
+from sales import sales_form
 from employees import connect_database
 import time
+
+def exit_app():
+    response = messagebox.askyesno("Exit", "Do you really want to exit?")
+    if response:
+        window.destroy()
 
 def update():
     cursor,connection=connect_database()
@@ -107,7 +113,7 @@ products_button=Button(leftFrame,image=products_icon, compound=LEFT, text=' Prod
 products_button.pack(fill= X)
 
 sales_icon=PhotoImage(file='images/sales.png')
-sales_button=Button(leftFrame,image=sales_icon, compound=LEFT, text=' Sales', font=('times new roman',20,'bold'),anchor='w',padx=10)
+sales_button=Button(leftFrame,image=sales_icon, compound=LEFT, text=' Sales', font=('times new roman',20,'bold'),anchor='w',padx=10, command=lambda:show_form(sales_form))
 sales_button.pack(fill= X)
 
 tax_icon=PhotoImage(file='images/tax.png')
@@ -115,7 +121,7 @@ tax_button=Button(leftFrame,image=tax_icon, compound=LEFT, text=' Tax', font=('t
 tax_button.pack(fill= X)
 
 exit_icon=PhotoImage(file='images/exit.png')
-exit_button=Button(leftFrame,image=exit_icon, compound=LEFT, text=' Exit', font=('times new roman',20,'bold'),anchor='w',padx=10)
+exit_button=Button(leftFrame,image=exit_icon, compound=LEFT, text=' Exit', font=('times new roman',20,'bold'),anchor='w',padx=10,command=exit_app)
 exit_button.pack(fill= X)
 
 #Total Employees
