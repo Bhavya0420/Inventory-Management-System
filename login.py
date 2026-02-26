@@ -105,6 +105,29 @@ def login_page(main_root):
                         bg="#f0f0f0")
     password_entry.place(x=70, y=340, width=320, height=35)
 
+   # Eye Images
+    eye_open = PhotoImage(file="images/eye_open.png")
+    eye_close = PhotoImage(file="images/eye_close.png")
+
+    # Toggle Function
+    def toggle_password():
+        if password_entry.cget("show") == "":
+            password_entry.config(show="*")
+            eye_button.config(image=eye_close)
+        else:
+            password_entry.config(show="")
+            eye_button.config(image=eye_open)
+
+    # Eye Button
+    eye_button = Button(right_frame,
+                        image=eye_close,
+                        bd=0,
+                        bg="#f0f0f0",
+                        activebackground="white",
+                        cursor="hand2",
+                        command=toggle_password)
+    eye_button.place(x=360, y=345)
+
     # Role Selection
     Label(right_frame, text="Select Role",
         font=("times new roman", 16),
