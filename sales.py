@@ -1,5 +1,31 @@
 from tkinter import *
 from tkinter import ttk
+import os
+
+def load_bills(bill_list):
+    bill_list.delete(0, END)
+
+    if os.path.exists("bills"):
+        files = os.listdir("bills")
+
+        # Optional: sort latest first
+        files.sort(reverse=True)
+
+        for file in files:
+            if file.endswith(".txt"):
+                bill_list.insert(END, file)
+
+
+def show_bill(event,bill_list,bill_text):
+    selected = bill_list.curselection()
+    if selected:
+        file_name = bill_list.get(selected[0])
+
+        with open(f"bills/{file_name}", "r", encoding="utf-8") as f:
+            content = f.read()
+
+        bill_text.delete(1.0, END)
+        bill_text.insert(END, content)
 
 
 def sales_form(window):
@@ -72,5 +98,9 @@ def sales_form(window):
     right_image = PhotoImage(file='images/salespage.png')  # put your image here
     image_label = Label(sales_frame, image=right_image, bg='white')
     image_label.place(x=800, y=200)
+
+    bill_list.bind("<<ListboxSelect>>", lambda event:show_bill(event,bill_list,bill_text))
+
+    load_bills(bill_list)
 
     return sales_frame
