@@ -41,7 +41,8 @@ def login(root):
             admin_name = row[1]
             admin_dashboard(root,admin_name)
         else:
-            employee_dashboard(root)
+            emp_name = row[1]
+            employee_dashboard(root,emp_name)
     else:
         messagebox.showerror("Error", "Invalid Credentials")
 
